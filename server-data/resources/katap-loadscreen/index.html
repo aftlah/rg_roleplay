@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Loading...</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <video id="bgVideo" class="bg" autoplay loop playsinline preload="auto">
+        <source src="loading-screen-fixed.mp4" type="video/mp4" />
+      </video>
+
+      <div class="overlay">
+        <div class="title">RG Roleplay</div>
+        <div class="subtitle" id="statusText">Indonesian Roleplay Server — Loading...</div>
+        <button id="soundBtn" class="sound-btn" type="button">Sound: OFF (SPACE)</button>
+      </div>
+    </div>
+
+    <script>
+      const statusEl = document.getElementById('statusText');
+      const videoEl = document.getElementById('bgVideo');
+      const soundBtn = document.getElementById('soundBtn');
+      let soundEnabled = true;
+
+      function setStatus(text) {
+        statusEl.textContent = text;
+      }
+
+      function setSoundEnabled(enabled) {
+        soundEnabled = enabled;
+        videoEl.muted = !enabled;
+        videoEl.volume = enabled ? 0.85 : 0.0;
+        soundBtn.textContent = enabled ? 'Sound: ON (SPACE)' : 'Sound: OFF (SPACE)';
+      }
+
+      function tryPlay() {
+        const p = videoEl.play();
+        if (p && typeof p.catch === 'function') {
+          p.catch(() => {});
+        }
+      }
+
+      window.addEventListener('message', (e) => {
+        if (!e.data || !e.data.eventName) return;
+        if (e.data.eventName === 'onLogLine' && e.data.message) {
+          setStatus(e.data.message);
+        }
+      });
+
+      videoEl.addEventListener('error', () => {
+        const code = videoEl.error ? videoEl.error.code : 0;
+        const map = {
+          1: 'Download error',
+          2: 'Network error',
+          3: 'Decode error (codec)',
+          4: 'Format tidak didukung',
+        };
+        const reason = map[code] || 'Unknown error';
+        setStatus(`Video gagal diputar: ${reason}. Coba export mp4 H.264/AVC + AAC.`);
+      });
+
+      videoEl.addEventListener('waiting', () => setStatus('Loading video...'));
+      videoEl.addEventListener('stalled', () => setStatus('Loading video...'));
+      videoEl.addEventListener('canplay', () => setStatus(''));
+      videoEl.addEventListener('playing', () => setStatus(''));
+
+      document.addEventListener('click', () => {
+        tryPlay();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.code === 'Space') {
+          e.preventDefault();
+          setSoundEnabled(!soundEnabled);
+          tryPlay();
+        }
+      });
+
+      soundBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setSoundEnabled(!soundEnabled);
+        tryPlay();
+      });
+
+      videoEl.addEventListener('loadeddata', () => {
+        tryPlay();
+      });
+
+      setSoundEnabled(true);
+      tryPlay();
+    </script>
+  </body>
+</html>

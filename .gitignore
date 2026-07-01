@@ -1,0 +1,25 @@
+# txAdmin runtime & sensitive data
+txData/admins.json
+txData/default/logs/
+txData/default/data/
+txData/default/config.json
+
+# Server runtime
+server-data/cache/
+server-data/db/
+server-data/server.cfg
+.replxx_history
+**/.replxx_history
+
+# FXServer binaries (large)
+artifacts/
+
+# Setup temp / test logs
+_downloads/
+_server_stdout.log
+_server_stderr.log
+
+# OS / editor
+Thumbs.db
+Desktop.ini
+.DS_Store

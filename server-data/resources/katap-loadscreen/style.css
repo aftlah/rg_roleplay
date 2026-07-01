@@ -1,0 +1,67 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+  background: #000;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif;
+}
+
+.wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35));
+  color: #fff;
+  text-align: center;
+  padding: 24px;
+}
+
+.title {
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-size: clamp(28px, 4vw, 56px);
+}
+
+.subtitle {
+  opacity: 0.85;
+  font-size: clamp(14px, 1.3vw, 18px);
+  max-width: min(900px, 92vw);
+  line-height: 1.4;
+}
+
+.sound-btn {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.sound-btn:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
