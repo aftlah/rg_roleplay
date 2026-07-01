@@ -10,4 +10,8 @@ dependency 'yarn'
 server_script 'webpack_builder.js'
 
 fx_version 'adamant'
+
+shared_script "@SecureServe/src/module/module.lua"
+
+file "@SecureServe/secureserve.key"
 game 'common'

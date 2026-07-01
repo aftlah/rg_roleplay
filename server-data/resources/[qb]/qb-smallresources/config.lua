@@ -48,27 +48,30 @@ Config.AIResponse = {
     }
 }
 
--- To Set This Up visit https://forum.cfx.re/t/how-to-updated-discord-rich-presence-custom-image/157686
+-- Discord Rich Presence (status "Playing" di profil Discord)
+-- Setup: https://discord.com/developers/applications → buat app → Rich Presence → upload gambar
+-- Panduan gambar: https://forum.cfx.re/t/how-to-updated-discord-rich-presence-custom-image/157686
 Config.Discord = {
-    isEnabled = false,                                     -- If set to true, then discord rich presence will be enabled
-    applicationId = '00000000000000000',                   -- The discord application id
-    iconLarge = 'logo_name',                               -- The name of the large icon
-    iconLargeHoverText = 'This is a Large icon with text', -- The hover text of the large icon
-    iconSmall = 'small_logo_name',                         -- The name of the small icon
-    iconSmallHoverText = 'This is a Small icon with text', -- The hover text of the small icon
-    updateRate = 60000,                                    -- How often the player count should be updated
-    showPlayerCount = true,                                -- If set to true the player count will be displayed in the rich presence
-    maxPlayers = 48,                                       -- Maximum amount of players
-    buttons = {
-        {
-            text = 'First Button!',
-            url = 'fivem://connect/localhost:30120'
-        },
-        {
-            text = 'Second Button!',
-            url = 'fivem://connect/localhost:30120'
-        }
-    }
+    isEnabled = true,                                      -- aktifkan setelah applicationId diisi
+    applicationId = '1521862020247453866',          -- Application ID dari Discord Developer Portal
+    iconLarge = 'rg_logo',                                 -- nama asset gambar besar (upload di Discord app)
+    iconLargeHoverText = 'RG Roleplay',
+    iconSmall = 'rg_small',                                -- opsional: icon kecil
+    iconSmallHoverText = 'RG Roleplay Indonesia',
+    updateRate = 30000,                                    -- update jumlah player tiap 30 detik
+    showPlayerCount = true,
+    maxPlayers = 32,                                       -- samakan dengan sv_maxclients di server.cfg
+    -- buttons = {
+    --     {
+    --         text = 'Discord RG',
+    --         url = 'https://discord.gg/ISI_INVITE_KAMU'
+    --     },
+    --     {
+    --         text = 'Join Server',
+    --         url = 'fivem://connect/localhost:30120'
+    --     }
+    -- }
+    buttons = {},
 }
 
 Config.Density = {
@@ -94,21 +97,21 @@ Config.Disable = {
 Config.RelieveWeedStress = math.random(15, 20) -- stress relief amount (100 max)
 
 Config.Consumables = {
-    eat = { -- default food items
-        ['sandwich'] = math.random(35, 54),
-        ['tosti'] = math.random(40, 50),
-        ['twerks_candy'] = math.random(35, 54),
-        ['snikkel_candy'] = math.random(40, 50)
+    eat = {
+        ['sandwich'] = { 35, 54 },
+        ['tosti'] = { 40, 50 },
+        ['twerks_candy'] = { 35, 54 },
+        ['snikkel_candy'] = { 40, 50 }
     },
-    drink = { -- default drink items
-        ['water_bottle'] = math.random(35, 54),
-        ['kurkakola'] = math.random(35, 54),
-        ['coffee'] = math.random(40, 50)
+    drink = {
+        ['water_bottle'] = { 35, 54 },
+        ['kurkakola'] = { 35, 54 },
+        ['coffee'] = { 40, 50 }
     },
-    alcohol = { -- default alcohol items
-        ['whiskey'] = math.random(20, 30),
-        ['beer'] = math.random(30, 40),
-        ['vodka'] = math.random(20, 40),
+    alcohol = {
+        ['whiskey'] = { 20, 30 },
+        ['beer'] = { 30, 40 },
+        ['vodka'] = { 20, 40 },
     },
     custom = { -- put any custom items here
         -- ['newitem'] = {

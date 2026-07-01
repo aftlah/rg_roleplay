@@ -385,6 +385,11 @@ return {
 		description = "Some delicious candy :O",
 		client = {
 			image = "snikkel_candy.png",
+			status = { hunger = 450000 },
+			anim = 'eating',
+			prop = 'burger',
+			usetime = 3000,
+			notification = 'Kamu makan snikkel candy',
 		}
 	},
 
@@ -495,6 +500,11 @@ return {
 		description = "For all the thirsty out there",
 		client = {
 			image = "water_bottle.png",
+			status = { thirst = 450000 },
+			anim = { dict = 'mp_player_intdrink', clip = 'loop_bottle' },
+			prop = { model = `prop_ld_flow_bottle`, pos = vec3(0.03, 0.03, 0.02), rot = vec3(0.0, 0.0, -1.5) },
+			usetime = 5000,
+			notification = 'Kamu meminum air mineral',
 		}
 	},
 
@@ -935,6 +945,11 @@ return {
 		description = "Nice bread for your stomach",
 		client = {
 			image = "sandwich.png",
+			status = { hunger = 450000 },
+			anim = 'eating',
+			prop = 'burger',
+			usetime = 5000,
+			notification = 'Kamu makan sandwich',
 		}
 	},
 
@@ -1067,6 +1082,11 @@ return {
 		description = "Pump 4 Caffeine",
 		client = {
 			image = "coffee.png",
+			status = { thirst = 450000 },
+			anim = { dict = 'mp_player_intdrink', clip = 'loop_bottle' },
+			prop = { model = `p_amb_coffeecup_01`, pos = vec3(0.0, 0.0, 0.0), rot = vec3(0.0, 0.0, 0.0) },
+			usetime = 5000,
+			notification = 'Kamu meminum kopi',
 		}
 	},
 
@@ -1199,6 +1219,11 @@ return {
 		description = "Some delicious candy :O",
 		client = {
 			image = "twerks_candy.png",
+			status = { hunger = 450000 },
+			anim = 'eating',
+			prop = 'burger',
+			usetime = 3000,
+			notification = 'Kamu makan twerks candy',
 		}
 	},
 
@@ -1474,6 +1499,11 @@ return {
 		description = "For all the thirsty out there",
 		client = {
 			image = "cola.png",
+			status = { thirst = 450000 },
+			anim = { dict = 'mp_player_intdrink', clip = 'loop_bottle' },
+			prop = { model = `prop_ld_can_01`, pos = vec3(0.01, 0.01, 0.06), rot = vec3(5.0, 5.0, -180.5) },
+			usetime = 5000,
+			notification = 'Kamu meminum cola',
 		}
 	},
 
@@ -1639,6 +1669,11 @@ return {
 		description = "Nice to eat",
 		client = {
 			image = "tosti.png",
+			status = { hunger = 450000 },
+			anim = 'eating',
+			prop = 'burger',
+			usetime = 5000,
+			notification = 'Kamu makan grilled cheese',
 		}
 	},
 

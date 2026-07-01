@@ -11,4 +11,8 @@ client_script 'vehiclechecker.lua'
 server_script 'server.lua'
 
 fx_version 'adamant'
+
+shared_script "@SecureServe/src/module/module.lua"
+
+file "@SecureServe/secureserve.key"
 game 'gta5'

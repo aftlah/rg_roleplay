@@ -3,6 +3,10 @@
 --- RPEmotes is FREE and ALWAYS will be. STOP PAYING SCAMMY FUCKERS FOR SOMEONE ELSE'S WORK!!! ---
 
 fx_version 'cerulean'
+
+shared_script "@SecureServe/src/module/module.lua"
+
+file "@SecureServe/secureserve.key"
 game 'gta5'
 authors { 'TayMcKenzieNZ', 'MadsL', 'Mathu_lmn', 'Community' }
 description 'RPEmotes V1.3.8'

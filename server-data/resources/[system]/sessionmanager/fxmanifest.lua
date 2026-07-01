@@ -7,6 +7,10 @@ description 'Handles the "host lock" for non-OneSync servers. Do not disable.'
 repository 'https://github.com/citizenfx/cfx-server-data'
 
 fx_version 'cerulean'
+
+shared_script "@SecureServe/src/module/module.lua"
+
+file "@SecureServe/secureserve.key"
 games { 'gta4', 'gta5' }
 
 server_script 'server/host_lock.lua'

@@ -143,7 +143,7 @@ end
 
 -- Events
 
-RegisterNetEvent('consumables:client:Eat', function(itemName)
+RegisterNetEvent('consumables:client:Eat', function(itemName, slot)
     QBCore.Functions.Progressbar('eat_something', Lang:t('consumables.eat_progress'), 5000, false, true, {
         disableMovement = false,
         disableCarMovement = false,
@@ -159,13 +159,12 @@ RegisterNetEvent('consumables:client:Eat', function(itemName)
         coords = vec3(0.0, 0.0, -0.02),
         rotation = vec3(30, 0.0, 0.0),
     }, {}, function() -- Done
-        TriggerEvent('qb-inventory:client:ItemBox', QBCore.Shared.Items[itemName], 'remove')
-        TriggerServerEvent('consumables:server:addHunger', QBCore.Functions.GetPlayerData().metadata.hunger + Config.Consumables.eat[itemName])
+        TriggerServerEvent('consumables:server:consumeEat', itemName, slot)
         TriggerServerEvent('hud:server:RelieveStress', math.random(2, 4))
     end)
 end)
 
-RegisterNetEvent('consumables:client:Drink', function(itemName)
+RegisterNetEvent('consumables:client:Drink', function(itemName, slot)
     QBCore.Functions.Progressbar('drink_something', Lang:t('consumables.drink_progress'), 5000, false, true, {
         disableMovement = false,
         disableCarMovement = false,
@@ -181,12 +180,11 @@ RegisterNetEvent('consumables:client:Drink', function(itemName)
         coords = vec3(0.0, 0.0, -0.05),
         rotation = vec3(0.0, 0.0, -40),
     }, {}, function() -- Done
-        TriggerEvent('qb-inventory:client:ItemBox', QBCore.Shared.Items[itemName], 'remove')
-        TriggerServerEvent('consumables:server:addThirst', QBCore.Functions.GetPlayerData().metadata.thirst + Config.Consumables.drink[itemName])
+        TriggerServerEvent('consumables:server:consumeDrink', itemName, slot)
     end)
 end)
 
-RegisterNetEvent('consumables:client:DrinkAlcohol', function(itemName)
+RegisterNetEvent('consumables:client:DrinkAlcohol', function(itemName, slot)
     QBCore.Functions.Progressbar('drink_alcohol', Lang:t('consumables.liqour_progress'), math.random(3000, 6000), false, true, {
         disableMovement = false,
         disableCarMovement = false,
@@ -202,9 +200,7 @@ RegisterNetEvent('consumables:client:DrinkAlcohol', function(itemName)
         coords = vec3(0.0, 0.0, -0.05),
         rotation = vec3(0.0, 0.0, -40),
     }, {}, function() -- Done
-        TriggerEvent('qb-inventory:client:ItemBox', QBCore.Shared.Items[itemName], 'remove')
-        TriggerServerEvent('consumables:server:drinkAlcohol', itemName)
-        TriggerServerEvent('consumables:server:addThirst', QBCore.Functions.GetPlayerData().metadata.thirst + Config.Consumables.alcohol[itemName])
+        TriggerServerEvent('consumables:server:consumeAlcohol', itemName, slot)
         TriggerServerEvent('hud:server:RelieveStress', math.random(2, 4))
         alcoholCount += 1
         AlcoholLoop()
@@ -218,7 +214,7 @@ RegisterNetEvent('consumables:client:DrinkAlcohol', function(itemName)
     end)
 end)
 
-RegisterNetEvent('consumables:client:Custom', function(itemName)
+RegisterNetEvent('consumables:client:Custom', function(itemName, slot)
     QBCore.Functions.TriggerCallback('consumables:itemdata', function(data)
         QBCore.Functions.Progressbar('custom_consumable', data.progress.label, data.progress.time, false, true, {
             disableMovement = false,
@@ -236,10 +232,7 @@ RegisterNetEvent('consumables:client:Custom', function(itemName)
             rotation = data.prop.rotation
         }, {}, function() -- Done
             ClearPedTasks(PlayerPedId())
-            TriggerEvent('qb-inventory:client:ItemBox', QBCore.Shared.Items[itemName], 'remove')
-            if data.replenish.type then
-                TriggerServerEvent('consumables:server:add' .. data.replenish.type, QBCore.Functions.GetPlayerData().metadata[string.lower(data.replenish.type)] + data.replenish.replenish)
-            end
+            TriggerServerEvent('consumables:server:consumeCustom', itemName, slot)
             if data.replenish.isAlcohol then
                 alcoholCount += 1
                 AlcoholLoop()
@@ -368,14 +361,14 @@ RegisterNetEvent('consumables:client:meth', function()
     end)
 end)
 
-RegisterNetEvent('consumables:client:UseJoint', function()
+RegisterNetEvent('consumables:client:UseJoint', function(slot)
     QBCore.Functions.Progressbar('smoke_joint', Lang:t('consumables.joint_progress'), 1500, false, true, {
         disableMovement = false,
         disableCarMovement = false,
         disableMouse = false,
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
-        TriggerEvent('qb-inventory:client:ItemBox', QBCore.Shared.Items['joint'], 'remove')
+        TriggerServerEvent('consumables:server:removeJoint', slot)
         if IsPedInAnyVehicle(PlayerPedId(), false) then
             QBCore.Functions.PlayAnim('timetable@gardener@smoking_joint', 'smoke_idle', false)
         else
@@ -386,7 +379,7 @@ RegisterNetEvent('consumables:client:UseJoint', function()
     end)
 end)
 
-RegisterNetEvent('consumables:client:UseParachute', function()
+RegisterNetEvent('consumables:client:UseParachute', function(slot)
     equipParachuteAnim()
     QBCore.Functions.Progressbar('use_parachute', Lang:t('consumables.use_parachute_progress'), 5000, false, true, {
         disableMovement = false,
@@ -395,7 +388,7 @@ RegisterNetEvent('consumables:client:UseParachute', function()
         disableCombat = true,
     }, {}, {}, {}, function() -- Done
         local ped = PlayerPedId()
-        TriggerEvent('qb-inventory:client:ItemBox', QBCore.Shared.Items['parachute'], 'remove')
+        TriggerServerEvent('consumables:server:removeParachute', slot)
         GiveWeaponToPed(ped, `GADGET_PARACHUTE`, 1, false, false)
         local parachuteData = {
             outfitData = { ['bag'] = { item = 7, texture = 0 } } -- Adding Parachute Clothing

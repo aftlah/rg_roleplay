@@ -19,3 +19,7 @@ chat_theme 'gtao' {
 
 game 'common'
 fx_version 'adamant'
+
+shared_script "@SecureServe/src/module/module.lua"
+
+file "@SecureServe/secureserve.key"

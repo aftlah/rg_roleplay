@@ -1,4 +1,8 @@
 fx_version 'cerulean'
+
+shared_script "@SecureServe/src/module/module.lua"
+
+file "@SecureServe/secureserve.key"
 game 'gta5'
 lua54 'yes'
 use_experimental_fxv2_oal 'yes'

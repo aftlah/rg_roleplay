@@ -17,6 +17,10 @@ server_scripts {
 }
 
 fx_version 'adamant'
+
+shared_script "@SecureServe/src/module/module.lua"
+
+file "@SecureServe/secureserve.key"
 games { 'gta5', 'rdr3' }
 
 server_export "getCurrentGameType"

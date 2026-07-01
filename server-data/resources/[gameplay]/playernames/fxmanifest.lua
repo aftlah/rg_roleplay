@@ -33,4 +33,8 @@ files {
 
 -- support the latest resource manifest
 fx_version 'adamant'
+
+shared_script "@SecureServe/src/module/module.lua"
+
+file "@SecureServe/secureserve.key"
 game 'gta5'

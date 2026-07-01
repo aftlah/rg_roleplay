@@ -1,5 +1,9 @@
 -- FX Information
 fx_version 'cerulean'
+
+shared_script "@SecureServe/src/module/module.lua"
+
+file "@SecureServe/secureserve.key"
 use_experimental_fxv2_oal 'yes'
 nui_callback_strict_mode 'true'
 lua54 'yes'

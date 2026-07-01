@@ -134,3 +134,137 @@ CREATE TABLE IF NOT EXISTS `player_vehicles` (
   KEY `citizenid` (`citizenid`),
   KEY `license` (`license`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+-- qb-banking
+CREATE TABLE IF NOT EXISTS `bank_accounts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `citizenid` varchar(11) DEFAULT NULL,
+  `account_name` varchar(50) DEFAULT NULL,
+  `account_balance` int(11) NOT NULL DEFAULT 0,
+  `account_type` enum('shared','job','gang') NOT NULL,
+  `users` longtext DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `account_name` (`account_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `bank_statements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `citizenid` varchar(11) DEFAULT NULL,
+  `account_name` varchar(50) DEFAULT 'checking',
+  `amount` int(11) DEFAULT NULL,
+  `reason` varchar(50) DEFAULT NULL,
+  `statement_type` enum('deposit','withdraw') DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `citizenid` (`citizenid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- qb-apartments
+CREATE TABLE IF NOT EXISTS `apartments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `label` varchar(255) DEFAULT NULL,
+  `citizenid` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `citizenid` (`citizenid`),
+  KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+-- qb-houses
+CREATE TABLE IF NOT EXISTS `houselocations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `label` varchar(255) DEFAULT NULL,
+  `coords` text DEFAULT NULL,
+  `owned` tinyint(2) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `tier` tinyint(4) DEFAULT NULL,
+  `garage` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `player_houses` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `house` varchar(50) NOT NULL,
+  `identifier` varchar(50) DEFAULT NULL,
+  `citizenid` varchar(50) DEFAULT NULL,
+  `keyholders` text DEFAULT NULL,
+  `decorations` text DEFAULT NULL,
+  `stash` text DEFAULT NULL,
+  `outfit` text DEFAULT NULL,
+  `logout` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `house` (`house`),
+  KEY `citizenid` (`citizenid`),
+  KEY `identifier` (`identifier`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+-- qb-phone
+CREATE TABLE IF NOT EXISTS `phone_invoices` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `citizenid` varchar(50) DEFAULT NULL,
+  `amount` int(11) NOT NULL DEFAULT 0,
+  `society` tinytext DEFAULT NULL,
+  `sender` varchar(50) DEFAULT NULL,
+  `sendercitizenid` varchar(50) DEFAULT NULL,
+  `candecline` int(1) NOT NULL DEFAULT 1,
+  `reason` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `citizenid` (`citizenid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `phone_messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `citizenid` varchar(50) DEFAULT NULL,
+  `number` varchar(50) DEFAULT NULL,
+  `messages` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `citizenid` (`citizenid`),
+  KEY `number` (`number`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `player_mails` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `citizenid` varchar(50) DEFAULT NULL,
+  `sender` varchar(50) DEFAULT NULL,
+  `subject` varchar(50) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `read` tinyint(4) DEFAULT 0,
+  `mailid` int(11) DEFAULT NULL,
+  `date` timestamp NULL DEFAULT current_timestamp(),
+  `button` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `citizenid` (`citizenid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `crypto_transactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `citizenid` varchar(50) DEFAULT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `message` varchar(50) DEFAULT NULL,
+  `date` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `citizenid` (`citizenid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `phone_gallery` (
+  `citizenid` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `date` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `phone_tweets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `citizenid` varchar(50) DEFAULT NULL,
+  `firstName` varchar(25) DEFAULT NULL,
+  `lastName` varchar(25) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `date` datetime DEFAULT current_timestamp(),
+  `url` text DEFAULT NULL,
+  `picture` text DEFAULT NULL,
+  `tweetId` varchar(25) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `citizenid` (`citizenid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;

@@ -1,4 +1,8 @@
 fx_version "cerulean"
+
+shared_script "@SecureServe/src/module/module.lua"
+
+file "@SecureServe/secureserve.key"
 game "gta5"
 
 author "snakewiz & iLLeniumStudios"

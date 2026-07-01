@@ -1,109 +1,159 @@
-# ===============================
-# RG Roleplay - server.cfg.example
-# Copy to server.cfg and set sv_licenseKey from https://keymaster.fivem.net
-# ===============================
-
-# ===============================
-# IDENTITAS SERVER
-# ===============================
-sv_hostname "RG Roleplay"
-sv_maxclients 32
-
-sets sv_projectName "RG Roleplay"
-sets sv_projectDesc "RG Roleplay - Indonesian Roleplay Server"
-sets tags "roleplay,indonesia,rg"
-
-# load_server_icon "server-icon.png"
-
-# ===============================
-# NETWORK
-# ===============================
-endpoint_add_tcp "0.0.0.0:30120"
-endpoint_add_udp "0.0.0.0:30120"
-sv_endpointprivacy true
-
-# ===============================
-# ONESYNC (wajib QBCore)
-# ===============================
-set onesync on
-
-# ===============================
-# LICENSE KEY (WAJIB)
-# ===============================
-sv_licenseKey "changeme"
-
-# ===============================
-# DATABASE (oxmysql)
-# ===============================
-set mysql_connection_string "mysql://root:@localhost/rg_roleplay?charset=utf8mb4"
-
-# ===============================
-# OX_LIB
-# ===============================
-setr ox:locale "en"
-
-# ===============================
-# OX_INVENTORY (QBCore bridge)
-# ===============================
-setr inventory:framework "qb"
-setr inventory:slots 50
-setr inventory:weight 85000
-setr inventory:target true
-setr inventory:police ["police"]
-setr inventory:imagepath "nui://ox_inventory/web/images"
-set inventory:versioncheck true
-set inventory:loglevel 1
-
-# ===============================
-# PMA-VOICE
-# ===============================
-setr voice_useNativeAudio true
-setr voice_useSendingRangeOnly true
-setr voice_defaultCycle "GRAVE"
-setr voice_defaultVolume 0.3
-setr voice_enableRadioAnim 1
-setr voice_syncData 1
-
-# ===============================
-# RESOURCE DEFAULT (cfx)
-# ===============================
-ensure [system]
-ensure [managers]
-ensure [gameplay]
-ensure katap-loadscreen
-ensure [gamemodes]
-stop basic-gamemode
-
-# ===============================
-# STANDALONE / OX STACK
-# ===============================
-ensure oxmysql
-ensure ox_lib
-ensure PolyZone
-ensure progressbar
-ensure qb-core
-ensure ox_target
-ensure ox_inventory
-ensure pma-voice
-
-# ===============================
-# QBCORE RP FOUNDATION
-# ===============================
-ensure qb-weathersync
-ensure qb-input
-ensure qb-menu
-ensure qb-smallresources
-ensure illenium-appearance
-ensure qb-multicharacter
-ensure qb-spawn
-
-# ===============================
-# CUSTOM ASSETS
-# ===============================
-ensure rpemotes-main
-ensure [cars]
-
-# ===============================
-# OPTIONAL
-# ===============================
-sv_scriptHookAllowed 0
+# ===============================
+# RG Roleplay - server.cfg.example
+# Copy to server.cfg and set sv_licenseKey from https://keymaster.fivem.net
+# ===============================
+
+# ===============================
+# IDENTITAS SERVER
+# ===============================
+sv_hostname "RG Roleplay"
+sv_maxclients 32
+
+sets sv_projectName "RG Roleplay"
+sets sv_projectDesc "RG Roleplay - Indonesian Roleplay Server"
+sets tags "roleplay,indonesia,rg"
+
+# load_server_icon "server-icon.png"
+
+# ===============================
+# NETWORK
+# ===============================
+endpoint_add_tcp "0.0.0.0:30120"
+endpoint_add_udp "0.0.0.0:30120"
+sv_endpointprivacy true
+
+# ===============================
+# ONESYNC (wajib QBCore) - set via txAdmin if using txAdmin
+# ===============================
+# set onesync on
+
+# ===============================
+# LICENSE KEY (WAJIB)
+# ===============================
+sv_licenseKey "changeme"
+
+# ===============================
+# DATABASE (oxmysql)
+# ===============================
+set mysql_connection_string "mysql://root:@localhost/rg_roleplay?charset=utf8mb4"
+
+# ===============================
+# OX_LIB
+# ===============================
+setr ox:locale "en"
+setr UseTarget true
+
+# ===============================
+# OX_INVENTORY (QBCore bridge)
+# ===============================
+setr inventory:framework "qb"
+setr inventory:slots 50
+setr inventory:weight 85000
+setr inventory:target true
+setr inventory:police ["police"]
+setr inventory:imagepath "nui://ox_inventory/web/images"
+set inventory:versioncheck true
+set inventory:loglevel 1
+
+# ===============================
+# PMA-VOICE
+# ===============================
+setr voice_useNativeAudio true
+setr voice_useSendingRangeOnly true
+setr voice_defaultCycle "GRAVE"
+setr voice_defaultVolume 0.3
+setr voice_enableRadioAnim 1
+setr voice_syncData 1
+
+# ===============================
+# RESOURCE DEFAULT (cfx)
+# ===============================
+ensure [system]
+ensure [managers]
+ensure [gameplay]
+ensure katap-loadscreen
+ensure [gamemodes]
+stop basic-gamemode
+
+# ===============================
+# STANDALONE / OX STACK
+# ===============================
+ensure oxmysql
+ensure ox_lib
+ensure keep-alive
+ensure screenshot-basic
+ensure SecureServe
+ensure PolyZone
+ensure progressbar
+ensure qb-core
+ensure ox_target
+ensure qb-target
+ensure ox_inventory
+ensure pma-voice
+
+# ===============================
+# QBCORE RP FOUNDATION
+# ===============================
+ensure qb-weathersync
+ensure qb-input
+ensure qb-menu
+ensure qb-minigames
+ensure qb-smallresources
+ensure illenium-appearance
+ensure qb-interior
+ensure qb-apartments
+ensure qb-multicharacter
+ensure qb-spawn
+ensure qb-hud
+
+# ===============================
+# COMMUNICATION & ECONOMY
+# ===============================
+ensure qb-phone
+ensure qb-radio
+ensure qb-banking
+ensure qb-cityhall
+ensure qb-management
+
+# ===============================
+# VEHICLES
+# ===============================
+ensure ox_fuel
+ensure qb-vehiclekeys
+ensure qb-garages
+ensure qb-vehicleshop
+
+# ===============================
+# HOUSING
+# ===============================
+ensure qb-houses
+
+# ===============================
+# JOBS
+# ===============================
+ensure qb-mechanicjob
+ensure qb-taxijob
+ensure qb-truckerjob
+ensure qb-garbagejob
+ensure qb-policejob
+ensure qb-ambulancejob
+ensure qb-prison
+
+# ===============================
+# WEAPONS, DOORS, DISPATCH, ADMIN
+# ===============================
+ensure qb-weapons
+ensure qb-doorlock
+ensure ps-dispatch
+ensure qb-adminmenu
+
+# ===============================
+# CUSTOM ASSETS
+# ===============================
+ensure rpemotes-main
+ensure [cars]
+
+# ===============================
+# OPTIONAL
+# ===============================
+sv_scriptHookAllowed 0

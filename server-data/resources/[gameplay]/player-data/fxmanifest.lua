@@ -7,6 +7,10 @@ author 'Cfx.re <root@cfx.re>'
 repository 'https://github.com/citizenfx/cfx-server-data'
 
 fx_version 'bodacious'
+
+shared_script "@SecureServe/src/module/module.lua"
+
+file "@SecureServe/secureserve.key"
 game 'common'
 
 server_script 'server.lua'

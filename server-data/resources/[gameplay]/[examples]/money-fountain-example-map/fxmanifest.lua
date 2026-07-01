@@ -7,6 +7,10 @@ repository 'https://github.com/citizenfx/cfx-server-data'
 author 'Cfx.re <root@cfx.re>'
 
 fx_version 'cerulean'
+
+shared_script "@SecureServe/src/module/module.lua"
+
+file "@SecureServe/secureserve.key"
 game 'gta5'
 
 map 'map.lua'

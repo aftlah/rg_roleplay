@@ -7,6 +7,10 @@ description 'Builds resources with yarn. To learn more: https://classic.yarnpkg.
 repository 'https://github.com/citizenfx/cfx-server-data'
 
 fx_version 'adamant'
+
+shared_script "@SecureServe/src/module/module.lua"
+
+file "@SecureServe/secureserve.key"
 game 'common'
 
 server_script 'yarn_builder.js'
